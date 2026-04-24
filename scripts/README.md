@@ -97,7 +97,8 @@ powershell -ExecutionPolicy Bypass -File .\scripts\iniciar-trabalho.ps1
 
 Funcao:
 
-- roda a sincronizacao com o GitHub
+- roda `git pull --ff-only` quando a pasta estiver em clone Git normal
+- usa sincronizacao por script so como fallback
 - serve como atalho simples para abrir uma nova sessao de trabalho
 
 ### `salvar-no-github.ps1`
@@ -112,8 +113,76 @@ Funcao:
 
 - valida scripts PowerShell
 - valida estrutura obrigatoria do projeto
-- publica tudo no GitHub
+- cria commit local e faz push para o GitHub
 - serve como atalho simples para encerrar um bloco de trabalho
+
+### `configurar-git-local.ps1`
+
+Uso:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\configurar-git-local.ps1
+```
+
+Funcao:
+
+- configura `user.name` e `user.email` localmente no repositorio
+- usa identidade segura derivada da conta GitHub autenticada
+
+### `git-save-to-origin.ps1`
+
+Uso:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\git-save-to-origin.ps1 -Message "Descreva aqui o que mudou"
+```
+
+Funcao:
+
+- detecta mudancas reais
+- cria commit pequeno e objetivo
+- sincroniza com `origin/main`
+- faz push para o GitHub
+
+### `autosave-to-github.ps1`
+
+Uso:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\autosave-to-github.ps1
+```
+
+Funcao:
+
+- roda validacoes
+- cria commit automatico so quando houver mudancas
+- faz push no GitHub
+- grava seus reports em `reports\autosave\`
+
+### `ativar-autosave.ps1`
+
+Uso:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\ativar-autosave.ps1
+```
+
+Funcao:
+
+- cria ou atualiza uma tarefa agendada do Windows
+- roda o autosave de tempos em tempos sem deixar terminal aberto
+
+### `desativar-autosave.ps1`
+
+Uso:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\desativar-autosave.ps1
+```
+
+Funcao:
+
+- remove a tarefa agendada de autosave
 
 ## Estrutura de report
 

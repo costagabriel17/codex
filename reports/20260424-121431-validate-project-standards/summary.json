@@ -1,0 +1,198 @@
+﻿{
+    "errors":  [
+
+               ],
+    "action":  "validate-project-standards",
+    "results":  {
+                    "checks":  [
+                                   {
+                                       "details":  "Presente.",
+                                       "name":  "path:README.md",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "Presente.",
+                                       "name":  "path:package.json",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "Presente.",
+                                       "name":  "path:requirements.txt",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "Presente.",
+                                       "name":  "path:.env.example",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "Presente.",
+                                       "name":  "path:deliverables\\README.md",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "Presente.",
+                                       "name":  "path:scripts\\README.md",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "Presente.",
+                                       "name":  "path:scripts\\configurar-git-local.ps1",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "Presente.",
+                                       "name":  "path:scripts\\git-save-to-origin.ps1",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "Presente.",
+                                       "name":  "path:scripts\\autosave-to-github.ps1",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "Presente.",
+                                       "name":  "path:scripts\\ativar-autosave.ps1",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "Presente.",
+                                       "name":  "path:scripts\\desativar-autosave.ps1",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "Presente.",
+                                       "name":  "path:scripts\\validate-scripts.ps1",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "Presente.",
+                                       "name":  "path:scripts\\validate-project-standards.ps1",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "Presente.",
+                                       "name":  "path:src\\README.md",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "Presente.",
+                                       "name":  "path:src\\node\\README.md",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "Presente.",
+                                       "name":  "path:src\\node\\lib\\reporting.mjs",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "Presente.",
+                                       "name":  "path:src\\node\\shopify\\graphql-admin-healthcheck.mjs",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "Presente.",
+                                       "name":  "path:src\\python\\README.md",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "Presente.",
+                                       "name":  "path:src\\playwright\\README.md",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "Presente.",
+                                       "name":  "path:src\\playwright\\audit-storefront.mjs",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "Presente.",
+                                       "name":  "path:src\\theme\\README.md",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "package.json deve usar type=module.",
+                                       "name":  "package:type",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "package.json deve ser private.",
+                                       "name":  "package:private",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "Script npm obrigatorio.",
+                                       "name":  "package:scripts:validate:scripts",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "Script npm obrigatorio.",
+                                       "name":  "package:scripts:validate:standards",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "Script npm obrigatorio.",
+                                       "name":  "package:scripts:git:save",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "Script npm obrigatorio.",
+                                       "name":  "package:scripts:autosave:run",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "Script npm obrigatorio.",
+                                       "name":  "package:scripts:shopify:admin:healthcheck",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "Script npm obrigatorio.",
+                                       "name":  "package:scripts:audit:storefront",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "Padrao obrigatorio em .gitignore.",
+                                       "name":  "gitignore:.env",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "Padrao obrigatorio em .gitignore.",
+                                       "name":  "gitignore:tmp/",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "Padrao obrigatorio em .gitignore.",
+                                       "name":  "gitignore:node_modules/",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "Padrao obrigatorio em .gitignore.",
+                                       "name":  "gitignore:.venv/",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "Padrao obrigatorio em .gitignore.",
+                                       "name":  "gitignore:playwright-report/",
+                                       "passed":  true
+                                   },
+                                   {
+                                       "details":  "Padrao obrigatorio em .gitignore.",
+                                       "name":  "gitignore:test-results/",
+                                       "passed":  true
+                                   }
+                               ]
+                },
+    "finishedAt":  "2026-04-24T12:14:31.2779522-03:00",
+    "validation":  [
+                       {
+                           "status":  "passed",
+                           "details":  "Estrutura obrigatoria do projeto validada com sucesso.",
+                           "type":  "project-standards"
+                       }
+                   ],
+    "startedAt":  "2026-04-24T12:14:31.1034393-03:00",
+    "inputs":  {
+                   "projectRoot":  "C:\\Users\\HUGO\\Documents\\Codex\\loja-shopify"
+               },
+    "status":  "success"
+}

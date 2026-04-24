@@ -8,6 +8,8 @@
   "scripts": {
     "validate:scripts": "powershell -ExecutionPolicy Bypass -File .\\scripts\\validate-scripts.ps1",
     "validate:standards": "powershell -ExecutionPolicy Bypass -File .\\scripts\\validate-project-standards.ps1",
+    "git:save": "powershell -ExecutionPolicy Bypass -File .\\scripts\\git-save-to-origin.ps1",
+    "autosave:run": "powershell -ExecutionPolicy Bypass -File .\\scripts\\autosave-to-github.ps1",
     "shopify:admin:healthcheck": "node .\\src\\node\\shopify\\graphql-admin-healthcheck.mjs",
     "audit:storefront": "node .\\src\\playwright\\audit-storefront.mjs"
   }

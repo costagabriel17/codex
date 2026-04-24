@@ -1,0 +1,36 @@
+﻿{
+    "errors":  [
+
+               ],
+    "action":  "validate-scripts",
+    "results":  {
+                    "checkedFiles":  [
+                                         "C:\\Users\\HUGO\\Documents\\Codex\\loja-shopify\\scripts\\ativar-autosave.ps1",
+                                         "C:\\Users\\HUGO\\Documents\\Codex\\loja-shopify\\scripts\\autosave-to-github.ps1",
+                                         "C:\\Users\\HUGO\\Documents\\Codex\\loja-shopify\\scripts\\configurar-git-local.ps1",
+                                         "C:\\Users\\HUGO\\Documents\\Codex\\loja-shopify\\scripts\\desativar-autosave.ps1",
+                                         "C:\\Users\\HUGO\\Documents\\Codex\\loja-shopify\\scripts\\git-save-to-origin.ps1",
+                                         "C:\\Users\\HUGO\\Documents\\Codex\\loja-shopify\\scripts\\iniciar-trabalho.ps1",
+                                         "C:\\Users\\HUGO\\Documents\\Codex\\loja-shopify\\scripts\\lib\\reporting.ps1",
+                                         "C:\\Users\\HUGO\\Documents\\Codex\\loja-shopify\\scripts\\publish-to-github.ps1",
+                                         "C:\\Users\\HUGO\\Documents\\Codex\\loja-shopify\\scripts\\salvar-no-github.ps1",
+                                         "C:\\Users\\HUGO\\Documents\\Codex\\loja-shopify\\scripts\\set-gh-token.ps1",
+                                         "C:\\Users\\HUGO\\Documents\\Codex\\loja-shopify\\scripts\\sync-from-github.ps1",
+                                         "C:\\Users\\HUGO\\Documents\\Codex\\loja-shopify\\scripts\\validate-project-standards.ps1",
+                                         "C:\\Users\\HUGO\\Documents\\Codex\\loja-shopify\\scripts\\validate-scripts.ps1"
+                                     ]
+                },
+    "finishedAt":  "2026-04-24T12:14:42.5537764-03:00",
+    "validation":  [
+                       {
+                           "status":  "passed",
+                           "details":  "Todos os scripts .ps1 foram validados sem erro de sintaxe.",
+                           "type":  "powershell-parser"
+                       }
+                   ],
+    "startedAt":  "2026-04-24T12:14:42.4422675-03:00",
+    "inputs":  {
+                   "scriptsRoot":  "C:\\Users\\HUGO\\Documents\\Codex\\loja-shopify\\scripts"
+               },
+    "status":  "success"
+}

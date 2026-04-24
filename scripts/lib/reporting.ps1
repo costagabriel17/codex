@@ -4,6 +4,19 @@ function Get-ProjectRoot {
 
 function Get-ReportsRoot {
     $reportsRoot = Join-Path (Get-ProjectRoot) "reports"
+    $reportsSubdir = $env:PROJECT_REPORTS_SUBDIR
+
+    if (-not [string]::IsNullOrWhiteSpace($reportsSubdir)) {
+        if ($reportsSubdir.Contains("..")) {
+            throw "PROJECT_REPORTS_SUBDIR invalido."
+        }
+
+        $segments = $reportsSubdir -split "[\\/]+" | Where-Object { $_ }
+        foreach ($segment in $segments) {
+            $reportsRoot = Join-Path $reportsRoot $segment
+        }
+    }
+
     if (-not (Test-Path -LiteralPath $reportsRoot)) {
         New-Item -ItemType Directory -Path $reportsRoot | Out-Null
     }

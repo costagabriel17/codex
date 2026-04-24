@@ -21,11 +21,11 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 Write-Host ""
-Write-Host "==> Publicando no GitHub" -ForegroundColor Cyan
-powershell -ExecutionPolicy Bypass -File (Join-Path $PSScriptRoot "publish-to-github.ps1") -Message $Message
+Write-Host "==> Salvando no GitHub" -ForegroundColor Cyan
+powershell -ExecutionPolicy Bypass -File (Join-Path $PSScriptRoot "git-save-to-origin.ps1") -Message $Message
 
 if ($LASTEXITCODE -ne 0) {
-    throw "Falha ao publicar no GitHub."
+    throw "Falha ao salvar no GitHub."
 }
 
 Write-Host ""

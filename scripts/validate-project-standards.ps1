@@ -55,6 +55,11 @@ try {
         ".env.example",
         "deliverables\README.md",
         "scripts\README.md",
+        "scripts\configurar-git-local.ps1",
+        "scripts\git-save-to-origin.ps1",
+        "scripts\autosave-to-github.ps1",
+        "scripts\ativar-autosave.ps1",
+        "scripts\desativar-autosave.ps1",
         "scripts\validate-scripts.ps1",
         "scripts\validate-project-standards.ps1",
         "src\README.md",
@@ -82,6 +87,8 @@ try {
     $requiredScripts = @(
         "validate:scripts",
         "validate:standards",
+        "git:save",
+        "autosave:run",
         "shopify:admin:healthcheck",
         "audit:storefront"
     )

@@ -15,7 +15,10 @@ function getTimestamp() {
 
 export async function createReportContext(action) {
   const projectRoot = getProjectRoot();
-  const reportsRoot = path.join(projectRoot, "reports");
+  const reportsSubdir = process.env.PROJECT_REPORTS_SUBDIR?.trim();
+  const reportsRoot = reportsSubdir
+    ? path.join(projectRoot, "reports", ...reportsSubdir.split(/[\\/]+/).filter(Boolean))
+    : path.join(projectRoot, "reports");
   await mkdir(reportsRoot, { recursive: true });
 
   const safeAction = action.replace(/[^a-zA-Z0-9-]/g, "-").toLowerCase();
