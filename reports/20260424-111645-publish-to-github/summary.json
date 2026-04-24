@@ -1,0 +1,95 @@
+﻿{
+    "errors":  [
+
+               ],
+    "action":  "publish-to-github",
+    "results":  {
+                    "remoteDiscoveryMode":  "git-tree",
+                    "uploadedFiles":  [
+                                          {
+                                              "path":  ".gitignore",
+                                              "commitSha":  "b8063961e4853737839c8ce0d8031df41992051a",
+                                              "blobSha":  "68689888fd3454f9885a59d6845897bf5f69cc09"
+                                          },
+                                          {
+                                              "path":  "README.md",
+                                              "commitSha":  "a4bd7f50898cbff290f75f5aab0f5e83f175b1b8",
+                                              "blobSha":  "a735321fe9e956532ae4b80c8365fb9c12488be9"
+                                          },
+                                          {
+                                              "path":  "reports/20260424-111421-validate-scripts/summary.json",
+                                              "commitSha":  "012abf000aea2599a096e83d922db09f2549cd0e",
+                                              "blobSha":  "e91d999244ca84803790fd575d30aee68fec1e1b"
+                                          },
+                                          {
+                                              "path":  "reports/20260424-111432-publish-to-github/summary.json",
+                                              "commitSha":  "6b716648800faf5a8e5660af4d6fdcf963bf3f83",
+                                              "blobSha":  "da2fbfd82e94c2465865e9fb924e8106ea4a8f9b"
+                                          },
+                                          {
+                                              "path":  "reports/20260424-111546-validate-scripts/summary.json",
+                                              "commitSha":  "53b7fb02ab2a047d6e6013f2d3f2d00e222a1cbe",
+                                              "blobSha":  "4c670f07358d272d8ab20b950c092f2c61a9f452"
+                                          },
+                                          {
+                                              "path":  "reports/20260424-111553-publish-to-github/summary.json",
+                                              "commitSha":  "29c44063790a7761448b25a0bd575fd747c4c72f",
+                                              "blobSha":  "7b6ca3f6d309883404bae3933a562df26ee4b19f"
+                                          },
+                                          {
+                                              "path":  "reports/20260424-111637-validate-scripts/summary.json",
+                                              "commitSha":  "bf0f009aee93c251a340687a9f010d56022b5e6b",
+                                              "blobSha":  "2f5cbf3a1b39765e81b9b15094cf77b38330bf13"
+                                          },
+                                          {
+                                              "path":  "scripts/lib/reporting.ps1",
+                                              "commitSha":  "8c5d1678f214c2ac0402ff47585dc9173bdba834",
+                                              "blobSha":  "0546cb973c5c407f5fed25f4f1977a6f3cb80c64"
+                                          },
+                                          {
+                                              "path":  "scripts/publish-to-github.ps1",
+                                              "commitSha":  "e5e3f4c888cf4105376f785f8c8f6eb1b2f33bb4",
+                                              "blobSha":  "31106bf433f242bdd51f2da25d5e2456abbeae2d"
+                                          },
+                                          {
+                                              "path":  "scripts/README.md",
+                                              "commitSha":  "178483c77da12e8bae28fd27b271a322e77eef70",
+                                              "blobSha":  "0a42b0b8f2f654bf08c7b59229beca8bf03a986d"
+                                          },
+                                          {
+                                              "path":  "scripts/set-gh-token.ps1",
+                                              "commitSha":  "b4a62578c8dd1cf05267a1eaba51a625e83079fd",
+                                              "blobSha":  "6dae53d59738a732cbf952ef0bf3d14af89f5361"
+                                          },
+                                          {
+                                              "path":  "scripts/sync-from-github.ps1",
+                                              "commitSha":  "0a85de226b0613a9df269e32dcfe759478925a75",
+                                              "blobSha":  "8d32d3281a7ca3bedf6911891060c22cb5dc0ecb"
+                                          },
+                                          {
+                                              "path":  "scripts/validate-scripts.ps1",
+                                              "commitSha":  "e71478e14fde43f7a7fff727d7eda7414fdea4b2",
+                                              "blobSha":  "b3e498e08fab149b8c71495b4e50deb30885bb0e"
+                                          }
+                                      ],
+                    "removedFiles":  [
+
+                                     ]
+                },
+    "finishedAt":  "2026-04-24T11:16:56.9307417-03:00",
+    "validation":  [
+                       {
+                           "status":  "passed",
+                           "details":  "Arquivos enviados e confirmados por resposta da API do GitHub.",
+                           "type":  "github-api"
+                       }
+                   ],
+    "startedAt":  "2026-04-24T11:16:45.7962427-03:00",
+    "inputs":  {
+                   "branch":  "main",
+                   "message":  "Codifica padrao operacional Shopify",
+                   "owner":  "costagabriel17",
+                   "repo":  "codex"
+               },
+    "status":  "success"
+}
