@@ -1,0 +1,28 @@
+﻿{
+    "errors":  [
+                   {
+                       "message":  "O servidor remoto retornou um erro: (404) Não Localizado."
+                   }
+               ],
+    "action":  "publish-to-github",
+    "results":  {
+                    "removedFiles":  [
+
+                                     ],
+                    "uploadedFiles":  [
+
+                                      ]
+                },
+    "finishedAt":  "2026-04-24T11:14:33.2715518-03:00",
+    "validation":  [
+
+                   ],
+    "startedAt":  "2026-04-24T11:14:32.0197586-03:00",
+    "inputs":  {
+                   "branch":  "main",
+                   "message":  "Codifica padrao operacional Shopify",
+                   "owner":  "costagabriel17",
+                   "repo":  "codex"
+               },
+    "status":  "failed"
+}
