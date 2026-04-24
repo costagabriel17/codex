@@ -87,6 +87,34 @@ Funcao:
 - confere manifests e pastas canônicas
 - gera report em `reports\`
 
+### `iniciar-trabalho.ps1`
+
+Uso:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\iniciar-trabalho.ps1
+```
+
+Funcao:
+
+- roda a sincronizacao com o GitHub
+- serve como atalho simples para abrir uma nova sessao de trabalho
+
+### `salvar-no-github.ps1`
+
+Uso:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\salvar-no-github.ps1 -Message "Descreva aqui o que mudou"
+```
+
+Funcao:
+
+- valida scripts PowerShell
+- valida estrutura obrigatoria do projeto
+- publica tudo no GitHub
+- serve como atalho simples para encerrar um bloco de trabalho
+
 ## Estrutura de report
 
 Cada execucao relevante cria uma pasta em `reports\YYYYMMDD-HHMMSS-acao\` com:
@@ -109,3 +137,4 @@ Campos esperados em `summary.json`:
 - Sempre que houver mutacao live, responder com o caminho do `summary.json`.
 - Sempre que possivel, validar o efeito real antes da resposta final.
 - Se nao houver validacao live possivel, registrar isso no report e na resposta final.
+- Para usuario leigo, prefira `iniciar-trabalho.ps1` e `salvar-no-github.ps1`.
