@@ -1,0 +1,23 @@
+﻿{
+    "errors":  [
+                   {
+                       "message":  "Existem mudancas locais nesta pasta. Publique ou guarde essas mudancas antes de sincronizar."
+                   }
+               ],
+    "action":  "sync-from-github",
+    "results":  {
+                    "remoteSha":  null,
+                    "mode":  null
+                },
+    "finishedAt":  "2026-04-24T11:19:41.2253398-03:00",
+    "validation":  [
+
+                   ],
+    "startedAt":  "2026-04-24T11:19:41.0801235-03:00",
+    "inputs":  {
+                   "branch":  "main",
+                   "owner":  "costagabriel17",
+                   "repo":  "codex"
+               },
+    "status":  "failed"
+}
