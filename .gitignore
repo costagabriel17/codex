@@ -2,6 +2,13 @@
 tmp/
 .env
 .env.*
+node_modules/
+.venv/
+venv/
+__pycache__/
+.pytest_cache/
+playwright-report/
+test-results/
 *.log
 *.tmp
 *.bak
