@@ -6,6 +6,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+. (Join-Path $PSScriptRoot "lib\reporting.ps1")
 
 function Write-Step {
     param([string]$Message)
@@ -15,6 +16,20 @@ function Write-Step {
 
 function Get-RepoRoot {
     return [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot ".."))
+}
+
+function Should-SkipPath {
+    param([string]$RelativePath)
+
+    $normalized = $RelativePath.Replace("\", "/")
+
+    if ($normalized.StartsWith(".git/")) { return $true }
+    if ($normalized.StartsWith(".codex/")) { return $true }
+    if ($normalized.StartsWith("tmp/")) { return $true }
+    if ($normalized -eq ".env") { return $true }
+    if ($normalized.StartsWith(".env.") -and $normalized -ne ".env.example") { return $true }
+
+    return $false
 }
 
 function Get-Headers {
@@ -48,6 +63,7 @@ function Get-RemoteState {
             return @{
                 BranchExists = $false
                 Files = @{}
+                DiscoveryMode = "branch-missing"
             }
         }
 
@@ -55,19 +71,52 @@ function Get-RemoteState {
     }
 
     $treeSha = $branchInfo.commit.commit.tree.sha
-    $treeUrl = "https://api.github.com/repos/$Owner/$Repo/git/trees/$treeSha?recursive=1"
-    $treeInfo = Invoke-RestMethod -Method Get -Uri $treeUrl -Headers $Headers
-
     $remoteFiles = @{}
-    foreach ($item in $treeInfo.tree) {
-        if ($item.type -eq "blob") {
-            $remoteFiles[$item.path] = $item.sha
+    $discoveryMode = "git-tree"
+
+    try {
+        $treeUrl = "https://api.github.com/repos/$Owner/$Repo/git/trees/${treeSha}?recursive=1"
+        $treeInfo = Invoke-RestMethod -Method Get -Uri $treeUrl -Headers $Headers
+
+        foreach ($item in $treeInfo.tree) {
+            if ($item.type -eq "blob") {
+                $remoteFiles[$item.path] = $item.sha
+            }
+        }
+    }
+    catch {
+        $discoveryMode = "contents-fallback"
+        $pendingDirectories = [System.Collections.Generic.Queue[string]]::new()
+        $pendingDirectories.Enqueue("")
+
+        while ($pendingDirectories.Count -gt 0) {
+            $currentPath = $pendingDirectories.Dequeue()
+            $contentsUrl = "https://api.github.com/repos/$Owner/$Repo/contents"
+            if ($currentPath) {
+                $encodedPath = ($currentPath -split "/") | ForEach-Object { [System.Uri]::EscapeDataString($_) }
+                $contentsUrl = "$contentsUrl/$($encodedPath -join "/")"
+            }
+
+            $contentsUrl = "${contentsUrl}?ref=$([System.Uri]::EscapeDataString($Branch))"
+            $contentItems = Invoke-RestMethod -Method Get -Uri $contentsUrl -Headers $Headers
+
+            foreach ($contentItem in $contentItems) {
+                if ($contentItem.type -eq "file") {
+                    $remoteFiles[$contentItem.path] = $contentItem.sha
+                    continue
+                }
+
+                if ($contentItem.type -eq "dir") {
+                    $pendingDirectories.Enqueue($contentItem.path)
+                }
+            }
         }
     }
 
     return @{
         BranchExists = $true
         Files = $remoteFiles
+        DiscoveryMode = $discoveryMode
     }
 }
 
@@ -79,10 +128,7 @@ function Get-LocalFiles {
 
     foreach ($file in $allFiles) {
         $relativePath = $file.FullName.Substring($RepoRoot.Length).TrimStart("\")
-        if ($relativePath.StartsWith(".git\")) {
-            continue
-        }
-        if ($relativePath.StartsWith(".codex\")) {
+        if (Should-SkipPath -RelativePath $relativePath) {
             continue
         }
 
@@ -105,55 +151,103 @@ function Get-ContentApiUrl {
 
 $repoRoot = Get-RepoRoot
 $headers = Get-Headers
-
-Write-Step "Lendo arquivos locais"
-$localFiles = Get-LocalFiles -RepoRoot $repoRoot
-
-Write-Step "Lendo arquivos ja existentes no GitHub"
-$remoteState = Get-RemoteState -Owner $Owner -Repo $Repo -Branch $Branch -Headers $headers
-$remoteFiles = $remoteState.Files
-$branchExists = $remoteState.BranchExists
-
-Write-Step "Removendo arquivos que nao existem mais localmente"
-$remoteOnly = $remoteFiles.Keys | Where-Object { -not $localFiles.ContainsKey($_) } | Sort-Object
-foreach ($relativePath in $remoteOnly) {
-    $deleteBody = @{
-        message = "${Message}: remove $relativePath"
-        sha = $remoteFiles[$relativePath]
+$report = New-ReportContext -Action "publish-to-github"
+$summary = @{
+    action = "publish-to-github"
+    status = "running"
+    startedAt = $report.StartedAt
+    inputs = @{
+        owner = $Owner
+        repo = $Repo
         branch = $Branch
-    } | ConvertTo-Json
-
-    $contentUrl = Get-ContentApiUrl -Owner $Owner -Repo $Repo -RelativePath $relativePath
-    Invoke-RestMethod -Method Delete -Uri $contentUrl -Headers $headers -Body $deleteBody -ContentType "application/json"
-    Write-Host "Removido do GitHub: $relativePath"
+        message = $Message
+    }
+    results = @{
+        uploadedFiles = @()
+        removedFiles = @()
+    }
+    validation = @()
+    errors = @()
 }
 
-Write-Step "Enviando arquivos locais"
-$localPaths = $localFiles.Keys | Sort-Object
-foreach ($relativePath in $localPaths) {
-    $filePath = $localFiles[$relativePath]
-    $bytes = [System.IO.File]::ReadAllBytes($filePath)
-    $contentBase64 = [System.Convert]::ToBase64String($bytes)
+try {
+    Write-Step "Lendo arquivos locais"
+    $localFiles = Get-LocalFiles -RepoRoot $repoRoot
 
-    $body = @{
-        message = "${Message}: $relativePath"
-        content = $contentBase64
+    Write-Step "Lendo arquivos ja existentes no GitHub"
+    $remoteState = Get-RemoteState -Owner $Owner -Repo $Repo -Branch $Branch -Headers $headers
+    $remoteFiles = $remoteState.Files
+    $branchExists = $remoteState.BranchExists
+    $summary.results.remoteDiscoveryMode = $remoteState.DiscoveryMode
+
+    Write-Step "Removendo arquivos que nao existem mais localmente"
+    $remoteOnly = $remoteFiles.Keys | Where-Object { -not $localFiles.ContainsKey($_) } | Sort-Object
+    foreach ($relativePath in $remoteOnly) {
+        $deleteBody = @{
+            message = "${Message}: remove $relativePath"
+            sha = $remoteFiles[$relativePath]
+            branch = $Branch
+        } | ConvertTo-Json
+
+        $contentUrl = Get-ContentApiUrl -Owner $Owner -Repo $Repo -RelativePath $relativePath
+        $deleteResponse = Invoke-RestMethod -Method Delete -Uri $contentUrl -Headers $headers -Body $deleteBody -ContentType "application/json"
+        $summary.results.removedFiles += @{
+            path = $relativePath
+            commitSha = $deleteResponse.commit.sha
+        }
+        Write-Host "Removido do GitHub: $relativePath"
     }
 
-    if ($branchExists) {
-        $body.branch = $Branch
+    Write-Step "Enviando arquivos locais"
+    $localPaths = $localFiles.Keys | Sort-Object
+    foreach ($relativePath in $localPaths) {
+        $filePath = $localFiles[$relativePath]
+        $bytes = [System.IO.File]::ReadAllBytes($filePath)
+        $contentBase64 = [System.Convert]::ToBase64String($bytes)
+
+        $body = @{
+            message = "${Message}: $relativePath"
+            content = $contentBase64
+        }
+
+        if ($branchExists) {
+            $body.branch = $Branch
+        }
+
+        if ($remoteFiles.ContainsKey($relativePath)) {
+            $body.sha = $remoteFiles[$relativePath]
+        }
+
+        $jsonBody = $body | ConvertTo-Json
+        $contentUrl = Get-ContentApiUrl -Owner $Owner -Repo $Repo -RelativePath $relativePath
+        $putResponse = Invoke-RestMethod -Method Put -Uri $contentUrl -Headers $headers -Body $jsonBody -ContentType "application/json"
+        $summary.results.uploadedFiles += @{
+            path = $relativePath
+            blobSha = $putResponse.content.sha
+            commitSha = $putResponse.commit.sha
+        }
+        Write-Host "Publicado no GitHub: $relativePath"
+        $branchExists = $true
     }
 
-    if ($remoteFiles.ContainsKey($relativePath)) {
-        $body.sha = $remoteFiles[$relativePath]
+    $summary.status = "success"
+    $summary.validation += @{
+        type = "github-api"
+        status = "passed"
+        details = "Arquivos enviados e confirmados por resposta da API do GitHub."
     }
 
-    $jsonBody = $body | ConvertTo-Json
-    $contentUrl = Get-ContentApiUrl -Owner $Owner -Repo $Repo -RelativePath $relativePath
-    Invoke-RestMethod -Method Put -Uri $contentUrl -Headers $headers -Body $jsonBody -ContentType "application/json"
-    Write-Host "Publicado no GitHub: $relativePath"
-    $branchExists = $true
+    Write-Host ""
+    Write-Host "Publicacao concluida com sucesso." -ForegroundColor Green
+    Write-Host "Report: $($report.SummaryPath)"
 }
-
-Write-Host ""
-Write-Host "Publicacao concluida com sucesso." -ForegroundColor Green
+catch {
+    $summary.status = "failed"
+    $summary.errors += @{
+        message = $_.Exception.Message
+    }
+    throw
+}
+finally {
+    Write-ReportSummary -Summary $summary -SummaryPath $report.SummaryPath
+}
