@@ -1,0 +1,28 @@
+﻿{
+    "errors":  [
+
+               ],
+    "action":  "validate-scripts",
+    "results":  {
+                    "checkedFiles":  [
+                                         "C:\\Users\\HUGO\\Documents\\Codex\\2026-04-23\\preciso-que-voc-seja-um-auxiliador\\scripts\\lib\\reporting.ps1",
+                                         "C:\\Users\\HUGO\\Documents\\Codex\\2026-04-23\\preciso-que-voc-seja-um-auxiliador\\scripts\\publish-to-github.ps1",
+                                         "C:\\Users\\HUGO\\Documents\\Codex\\2026-04-23\\preciso-que-voc-seja-um-auxiliador\\scripts\\set-gh-token.ps1",
+                                         "C:\\Users\\HUGO\\Documents\\Codex\\2026-04-23\\preciso-que-voc-seja-um-auxiliador\\scripts\\sync-from-github.ps1",
+                                         "C:\\Users\\HUGO\\Documents\\Codex\\2026-04-23\\preciso-que-voc-seja-um-auxiliador\\scripts\\validate-scripts.ps1"
+                                     ]
+                },
+    "finishedAt":  "2026-04-24T11:14:21.1442681-03:00",
+    "validation":  [
+                       {
+                           "status":  "passed",
+                           "details":  "Todos os scripts .ps1 foram validados sem erro de sintaxe.",
+                           "type":  "powershell-parser"
+                       }
+                   ],
+    "startedAt":  "2026-04-24T11:14:21.0361775-03:00",
+    "inputs":  {
+                   "scriptsRoot":  "C:\\Users\\HUGO\\Documents\\Codex\\2026-04-23\\preciso-que-voc-seja-um-auxiliador\\scripts"
+               },
+    "status":  "success"
+}
