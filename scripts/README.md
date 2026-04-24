@@ -15,6 +15,7 @@ Antes de rodar qualquer script:
 - Falhas de API devem ser tratadas no script com saida previsivel.
 - Nenhum script deve imprimir ou gravar secrets.
 - Toda validacao deve ser reproduzivel no Windows com PowerShell.
+- A camada operacional Shopify principal fica em `src\node\`, `src\python\`, `src\playwright\` e `src\theme\`.
 
 ## Scripts canonicos
 
@@ -70,6 +71,20 @@ powershell -ExecutionPolicy Bypass -File .\scripts\validate-scripts.ps1
 Funcao:
 
 - valida a sintaxe dos scripts PowerShell do projeto
+- gera report em `reports\`
+
+### `validate-project-standards.ps1`
+
+Uso:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\validate-project-standards.ps1
+```
+
+Funcao:
+
+- valida a estrutura obrigatoria do projeto
+- confere manifests e pastas canônicas
 - gera report em `reports\`
 
 ## Estrutura de report
