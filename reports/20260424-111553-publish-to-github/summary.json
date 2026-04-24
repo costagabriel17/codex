@@ -1,0 +1,28 @@
+﻿{
+    "errors":  [
+                   {
+                       "message":  "URI inválido: o nome do host não pôde ser analisado."
+                   }
+               ],
+    "action":  "publish-to-github",
+    "results":  {
+                    "removedFiles":  [
+
+                                     ],
+                    "uploadedFiles":  [
+
+                                      ]
+                },
+    "finishedAt":  "2026-04-24T11:15:54.5948002-03:00",
+    "validation":  [
+
+                   ],
+    "startedAt":  "2026-04-24T11:15:53.4313364-03:00",
+    "inputs":  {
+                   "branch":  "main",
+                   "message":  "Codifica padrao operacional Shopify",
+                   "owner":  "costagabriel17",
+                   "repo":  "codex"
+               },
+    "status":  "failed"
+}
