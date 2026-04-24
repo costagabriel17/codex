@@ -1,45 +1,71 @@
-# Projeto Codex
+# Projeto Operacional Shopify
 
-Esta pasta e a base local do projeto ligado ao repositorio:
+Repositorio: https://github.com/costagabriel17/codex
 
-https://github.com/costagabriel17/codex
+## Objetivo
 
-## Regra principal
+Esta pasta e a base operacional do projeto Shopify da loja ativa deste workspace.
+O projeto deve operar com:
 
-Antes de rodar qualquer script ou continuar um trabalho:
+- escopo isolado por loja
+- automacao reutilizavel
+- validacao antes de resposta final
+- relatorios em `reports\`
+- operacao local segura no Windows
 
-1. Atualize a pasta com `scripts\sync-from-github.ps1`
-2. Faca o trabalho
-3. Publique de volta com `scripts\publish-to-github.ps1`
+## Leitura obrigatoria antes de agir
 
-## Estrutura inicial
+1. Ler este arquivo.
+2. Ler `scripts\README.md`.
+3. So depois executar scripts ou mutacoes live.
 
-- `scripts\sync-from-github.ps1`: baixa a versao mais recente do GitHub
-- `scripts\publish-to-github.ps1`: envia os arquivos atuais para o GitHub
+## Fluxo padrao entre maquinas
 
-## Como usar
-
-Atualizar antes de trabalhar:
+1. Atualizar a pasta local com o GitHub:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\sync-from-github.ps1
 ```
 
-Publicar alteracoes:
+2. Executar o trabalho nesta pasta.
+3. Validar com os scripts aplicaveis.
+4. Publicar de volta no GitHub:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\publish-to-github.ps1 -Message "Atualiza scripts do projeto"
+powershell -ExecutionPolicy Bypass -File .\scripts\publish-to-github.ps1 -Message "Descreva aqui o que mudou"
 ```
 
-Salvar o token do GitHub nesta maquina:
+## Estrutura operacional
+
+- `scripts\`: scripts canonicos e utilitarios compartilhados
+- `reports\`: provas de execucao e mutacoes live com `summary.json`
+- `tmp\`: arquivos temporarios locais nao versionados
+- `.codex\`: estado tecnico local do agente
+
+## Politicas principais
+
+- Nunca commitar `.env`, tokens ou segredos.
+- Toda mutacao live deve deixar prova em `reports\`.
+- Toda alteracao relevante deve atualizar esta documentacao e `scripts\README.md`.
+- Sempre preferir script canonico em vez de acao manual repetitiva.
+- Encerrar o trabalho sem processos ou terminais pendurados.
+
+## Comandos base
+
+Salvar token do GitHub nesta maquina:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\set-gh-token.ps1
 ```
 
+Validar scripts PowerShell do projeto:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\validate-scripts.ps1
+```
+
 ## Observacoes
 
-- A pasta `.git` fica localmente nesta maquina para controle de versao local.
-- A pasta `.codex` guarda somente estado temporario da sincronizacao.
-- O script de publicacao precisa de acesso autenticado ao GitHub para funcionar.
-- Para publicar, use um token do GitHub com permissao para ler e escrever o conteudo do repositorio.
+- O GitHub e a fonte central de sincronizacao entre maquinas.
+- Os scripts usam `GH_TOKEN` local da maquina do dono da loja.
+- O projeto e mantido com foco em robustez, rastreabilidade e operacao mobile-first quando houver UX/storefront.
