@@ -1,0 +1,14 @@
+{
+  "name": "shopify-ops-codex",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "validate:scripts": "powershell -ExecutionPolicy Bypass -File .\\scripts\\validate-scripts.ps1",
+    "validate:standards": "powershell -ExecutionPolicy Bypass -File .\\scripts\\validate-project-standards.ps1",
+    "shopify:admin:healthcheck": "node .\\src\\node\\shopify\\graphql-admin-healthcheck.mjs",
+    "audit:storefront": "node .\\src\\playwright\\audit-storefront.mjs"
+  }
+}
