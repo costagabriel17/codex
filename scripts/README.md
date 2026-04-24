@@ -143,6 +143,7 @@ Funcao:
 - cria commit pequeno e objetivo
 - sincroniza com `origin/main`
 - faz push para o GitHub
+- grava seu report tecnico em `reports\runtime\`
 
 ### `autosave-to-github.ps1`
 

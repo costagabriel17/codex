@@ -123,3 +123,4 @@ powershell -ExecutionPolicy Bypass -File .\scripts\desativar-autosave.ps1
 - O codigo operacional Shopify fica em `src\` e os utilitarios PowerShell atuam como camada Windows/orquestracao.
 - O autosave cria commits pequenos periodicos e so publica quando ha mudanca real validada.
 - Os reports do autosave ficam em `reports\autosave\` e nao entram no Git para evitar loop infinito de commits.
+- Os reports internos de infraestrutura local ficam em `reports\runtime\` e tambem nao entram no Git.

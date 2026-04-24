@@ -10,6 +10,8 @@ __pycache__/
 playwright-report/
 test-results/
 reports/autosave/
+reports/runtime/
+reports/*-git-save-to-origin/
 *.log
 *.tmp
 *.bak

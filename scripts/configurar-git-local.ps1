@@ -1,4 +1,5 @@
 $ErrorActionPreference = "Stop"
+$env:PROJECT_REPORTS_SUBDIR = "runtime"
 
 Write-Host ""
 Write-Host "==> Configurando identidade local do Git" -ForegroundColor Cyan

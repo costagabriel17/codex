@@ -3,6 +3,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+$env:PROJECT_REPORTS_SUBDIR = "runtime"
 . (Join-Path $PSScriptRoot "lib\reporting.ps1")
 
 function Write-Step {
