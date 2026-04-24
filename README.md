@@ -89,9 +89,24 @@ Validar o padrao estrutural do projeto:
 powershell -ExecutionPolicy Bypass -File .\scripts\validate-project-standards.ps1
 ```
 
+Jeito facil para o dia a dia:
+
+Antes de comecar a trabalhar:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\iniciar-trabalho.ps1
+```
+
+Quando terminar e quiser salvar tudo no GitHub:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\salvar-no-github.ps1 -Message "Descreva aqui o que mudou"
+```
+
 ## Observacoes
 
 - O GitHub e a fonte central de sincronizacao entre maquinas.
 - Os scripts usam `GH_TOKEN` local da maquina do dono da loja.
 - O projeto e mantido com foco em robustez, rastreabilidade e operacao mobile-first quando houver UX/storefront.
 - O codigo operacional Shopify fica em `src\` e os utilitarios PowerShell atuam como camada Windows/orquestracao.
+- O salvamento no GitHub nao deve acontecer a cada tecla digitada. O ponto seguro e salvar no final de cada bloco de trabalho.
