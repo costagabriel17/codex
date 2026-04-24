@@ -1,0 +1,180 @@
+﻿{
+    "errors":  [
+
+               ],
+    "action":  "publish-to-github",
+    "results":  {
+                    "remoteDiscoveryMode":  "git-tree",
+                    "uploadedFiles":  [
+                                          {
+                                              "path":  ".env.example",
+                                              "commitSha":  "e4bcd6817f04ff01c3530ae7d9662cdd21142fff",
+                                              "blobSha":  "15432295ec64ad5081667acb15199060378436e3"
+                                          },
+                                          {
+                                              "path":  ".gitignore",
+                                              "commitSha":  "86ec4ce10a13032b860504781fa598945ff794c0",
+                                              "blobSha":  "04ec501818bafed439d1424a4e12abb77b40195f"
+                                          },
+                                          {
+                                              "path":  "deliverables/README.md",
+                                              "commitSha":  "bb0aa197b33d4c40f3350734a19c519ca2fceec0",
+                                              "blobSha":  "7eec3da58f9e819d998622c74b9b329463b96ca0"
+                                          },
+                                          {
+                                              "path":  "package.json",
+                                              "commitSha":  "1bab0b11960843e17cefefd37226d476892594a1",
+                                              "blobSha":  "d39c1b7f8631a2de78347840e7b04d0afe663d95"
+                                          },
+                                          {
+                                              "path":  "README.md",
+                                              "commitSha":  "53135efdb74477dd6f69e2755dafe09c7ba00676",
+                                              "blobSha":  "1b02d6f24319eaac4f97697c9dad259bad190f75"
+                                          },
+                                          {
+                                              "path":  "reports/20260424-111421-validate-scripts/summary.json",
+                                              "commitSha":  "d5854f893ad7a1dcd09fdf0acb77a0d0d0e1e77a",
+                                              "blobSha":  "e91d999244ca84803790fd575d30aee68fec1e1b"
+                                          },
+                                          {
+                                              "path":  "reports/20260424-111432-publish-to-github/summary.json",
+                                              "commitSha":  "716dd9d8a6175aa50c1264946d46400c7a8d4b83",
+                                              "blobSha":  "da2fbfd82e94c2465865e9fb924e8106ea4a8f9b"
+                                          },
+                                          {
+                                              "path":  "reports/20260424-111546-validate-scripts/summary.json",
+                                              "commitSha":  "c6d665c7cccbddc7996b165c73bcae187291dafd",
+                                              "blobSha":  "4c670f07358d272d8ab20b950c092f2c61a9f452"
+                                          },
+                                          {
+                                              "path":  "reports/20260424-111553-publish-to-github/summary.json",
+                                              "commitSha":  "0b961249c961ccb568e966710a10bbdd82255f4d",
+                                              "blobSha":  "7b6ca3f6d309883404bae3933a562df26ee4b19f"
+                                          },
+                                          {
+                                              "path":  "reports/20260424-111637-validate-scripts/summary.json",
+                                              "commitSha":  "11fca36a2e41df56d2648bdf6ff6fe310333ae02",
+                                              "blobSha":  "2f5cbf3a1b39765e81b9b15094cf77b38330bf13"
+                                          },
+                                          {
+                                              "path":  "reports/20260424-111645-publish-to-github/summary.json",
+                                              "commitSha":  "8aa869eb25fef4744c48a2fabe74ba3d3cf8650c",
+                                              "blobSha":  "953c064cb987cf7d468b04c87f2cd29cc0b03a4d"
+                                          },
+                                          {
+                                              "path":  "reports/20260424-111941-sync-from-github/summary.json",
+                                              "commitSha":  "5b986983cb2a59803738dcc03cfcd7afd46cabb0",
+                                              "blobSha":  "c0caadf233dae7c0a6aa1fe75c1baf686007bd9f"
+                                          },
+                                          {
+                                              "path":  "reports/20260424-112339-validate-project-standards/summary.json",
+                                              "commitSha":  "2b1d8d3777b3a61966c121aadc3f18186747efc0",
+                                              "blobSha":  "4e360244348db3dbec11e62bd3f39c4245c5ad1c"
+                                          },
+                                          {
+                                              "path":  "reports/20260424-112339-validate-scripts/summary.json",
+                                              "commitSha":  "69a2557afa13fef491c7cb4d95012ed4dd575821",
+                                              "blobSha":  "1a373e7c6e0f18ba5aa97a9e6a3e69754c8a5a64"
+                                          },
+                                          {
+                                              "path":  "requirements.txt",
+                                              "commitSha":  "258d1ee84802ce4d9bae1d56fa9879f799094540",
+                                              "blobSha":  "2e13e50922be000692e5fb7b5ed97b3a57ee0864"
+                                          },
+                                          {
+                                              "path":  "scripts/lib/reporting.ps1",
+                                              "commitSha":  "9a28ac8c6c577e5939ce8dd40ee8415ff4a5b815",
+                                              "blobSha":  "0546cb973c5c407f5fed25f4f1977a6f3cb80c64"
+                                          },
+                                          {
+                                              "path":  "scripts/publish-to-github.ps1",
+                                              "commitSha":  "05f223c0f49d79eddb340cdaa399bd53a66a23c3",
+                                              "blobSha":  "31106bf433f242bdd51f2da25d5e2456abbeae2d"
+                                          },
+                                          {
+                                              "path":  "scripts/README.md",
+                                              "commitSha":  "36a3b284c9e349734f9978b877b96e539c749014",
+                                              "blobSha":  "cbb73cd7bd3ca8fb64a6cf7d8b4149514c8ebbee"
+                                          },
+                                          {
+                                              "path":  "scripts/set-gh-token.ps1",
+                                              "commitSha":  "d05493b521636a32bac284f995f06ce54504dbb5",
+                                              "blobSha":  "6dae53d59738a732cbf952ef0bf3d14af89f5361"
+                                          },
+                                          {
+                                              "path":  "scripts/sync-from-github.ps1",
+                                              "commitSha":  "64678a14de22fd7167eef2480d8c9d477e8c5997",
+                                              "blobSha":  "8d32d3281a7ca3bedf6911891060c22cb5dc0ecb"
+                                          },
+                                          {
+                                              "path":  "scripts/validate-project-standards.ps1",
+                                              "commitSha":  "a1934ebf492d25c11934b83e5d7e8b6f8b4ad64e",
+                                              "blobSha":  "1e4f02d637685ab723dc87e72a23daa06edfa13a"
+                                          },
+                                          {
+                                              "path":  "scripts/validate-scripts.ps1",
+                                              "commitSha":  "fdde6b8a97e9063197aabd02ad953ce5db53e54a",
+                                              "blobSha":  "b3e498e08fab149b8c71495b4e50deb30885bb0e"
+                                          },
+                                          {
+                                              "path":  "src/node/lib/reporting.mjs",
+                                              "commitSha":  "7e4a50d4f89eb7e6fb1cadf9715f373efa75a14f",
+                                              "blobSha":  "edaa74d1385e572498d97783739d422e60bbe317"
+                                          },
+                                          {
+                                              "path":  "src/node/README.md",
+                                              "commitSha":  "df2a7f0efb15b23d1f7827b314652556a38c0277",
+                                              "blobSha":  "681aac4e534901158a057f988a7d56576ef5ed7c"
+                                          },
+                                          {
+                                              "path":  "src/node/shopify/graphql-admin-healthcheck.mjs",
+                                              "commitSha":  "28f38b23c64f888edc9b7a057243e926c671360a",
+                                              "blobSha":  "3153d7a056d295b409b1575a497b898d7da2b891"
+                                          },
+                                          {
+                                              "path":  "src/playwright/audit-storefront.mjs",
+                                              "commitSha":  "eb5f1af350aaad606a26f662b61bd201dcec1556",
+                                              "blobSha":  "061dd64ab0ecda8dbeeab94be939bcb6f88f16c8"
+                                          },
+                                          {
+                                              "path":  "src/playwright/README.md",
+                                              "commitSha":  "8c6fef44c525a7c5c95d0a2536fbe74c0efee346",
+                                              "blobSha":  "281038de70b72232d94f200fad2131b5564ac1c1"
+                                          },
+                                          {
+                                              "path":  "src/python/README.md",
+                                              "commitSha":  "beb10da894f23af40e31d5fe56a5e28c8dd8ea5b",
+                                              "blobSha":  "ffd28e40bfa34e6e38500ef31510360c79164ae9"
+                                          },
+                                          {
+                                              "path":  "src/README.md",
+                                              "commitSha":  "de84c0fd779e33eb9a8f5bc446e3cca8a22b6841",
+                                              "blobSha":  "c9efbd5282641873629fb4dea003c4c560d1c4ce"
+                                          },
+                                          {
+                                              "path":  "src/theme/README.md",
+                                              "commitSha":  "91e6e9f3866d0d4712b1443d722454fa537106c2",
+                                              "blobSha":  "c2adcc4a9c3739cfe698505c45159fd83a7f6730"
+                                          }
+                                      ],
+                    "removedFiles":  [
+
+                                     ]
+                },
+    "finishedAt":  "2026-04-24T11:24:14.0838153-03:00",
+    "validation":  [
+                       {
+                           "status":  "passed",
+                           "details":  "Arquivos enviados e confirmados por resposta da API do GitHub.",
+                           "type":  "github-api"
+                       }
+                   ],
+    "startedAt":  "2026-04-24T11:23:49.9247996-03:00",
+    "inputs":  {
+                   "branch":  "main",
+                   "message":  "Codifica stack e padroes obrigatorios do projeto",
+                   "owner":  "costagabriel17",
+                   "repo":  "codex"
+               },
+    "status":  "success"
+}
