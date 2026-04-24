@@ -5,6 +5,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+. (Join-Path $PSScriptRoot "lib\reporting.ps1")
 
 function Write-Step {
     param([string]$Message)
@@ -96,35 +97,71 @@ function Remove-RepoContentSafely {
 $repoRoot = Get-RepoRoot
 $stateRoot = Join-Path $repoRoot ".codex"
 $lastSyncFile = Join-Path $stateRoot "last-synced.sha"
+$report = New-ReportContext -Action "sync-from-github"
+$summary = @{
+    action = "sync-from-github"
+    status = "running"
+    startedAt = $report.StartedAt
+    inputs = @{
+        owner = $Owner
+        repo = $Repo
+        branch = $Branch
+    }
+    results = @{
+        remoteSha = $null
+        mode = $null
+    }
+    validation = @()
+    errors = @()
+}
 
 if (-not (Test-Path -LiteralPath $stateRoot)) {
     New-Item -ItemType Directory -Path $stateRoot | Out-Null
 }
 
-Write-Step "Validando mudancas locais"
-Test-LocalChanges -RepoRoot $repoRoot
-
-Write-Step "Consultando a versao mais recente no GitHub"
-$branchInfo = Get-RemoteBranchInfo -Owner $Owner -Repo $Repo -Branch $Branch
-
-if (-not $branchInfo) {
-    Write-Host "O repositorio remoto ainda nao tem arquivos publicados. Nada para baixar." -ForegroundColor Yellow
-    exit 0
-}
-
-$remoteSha = $branchInfo.commit.sha
-
-if ((Test-Path -LiteralPath $lastSyncFile) -and ((Get-Content -LiteralPath $lastSyncFile -Raw).Trim() -eq $remoteSha)) {
-    Write-Host "Esta pasta ja esta sincronizada com a ultima versao do GitHub." -ForegroundColor Green
-    exit 0
-}
-
-$tempRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("codex-sync-" + [System.Guid]::NewGuid().ToString("N"))
-$archivePath = Join-Path $tempRoot "repo.tar.gz"
-
-New-Item -ItemType Directory -Path $tempRoot | Out-Null
+$tempRoot = $null
 
 try {
+    Write-Step "Validando mudancas locais"
+    Test-LocalChanges -RepoRoot $repoRoot
+
+    Write-Step "Consultando a versao mais recente no GitHub"
+    $branchInfo = Get-RemoteBranchInfo -Owner $Owner -Repo $Repo -Branch $Branch
+
+    if (-not $branchInfo) {
+        $summary.status = "success"
+        $summary.results.mode = "noop-empty-remote"
+        $summary.validation += @{
+            type = "github-branch-check"
+            status = "passed"
+            details = "Repositorio remoto sem arquivos publicados."
+        }
+        Write-Host "O repositorio remoto ainda nao tem arquivos publicados. Nada para baixar." -ForegroundColor Yellow
+        Write-Host "Report: $($report.SummaryPath)"
+        return
+    }
+
+    $remoteSha = $branchInfo.commit.sha
+    $summary.results.remoteSha = $remoteSha
+
+    if ((Test-Path -LiteralPath $lastSyncFile) -and ((Get-Content -LiteralPath $lastSyncFile -Raw).Trim() -eq $remoteSha)) {
+        $summary.status = "success"
+        $summary.results.mode = "noop-already-synced"
+        $summary.validation += @{
+            type = "sha-compare"
+            status = "passed"
+            details = "A pasta local ja estava alinhada com o commit remoto."
+        }
+        Write-Host "Esta pasta ja esta sincronizada com a ultima versao do GitHub." -ForegroundColor Green
+        Write-Host "Report: $($report.SummaryPath)"
+        return
+    }
+
+    $tempRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("codex-sync-" + [System.Guid]::NewGuid().ToString("N"))
+    $archivePath = Join-Path $tempRoot "repo.tar.gz"
+
+    New-Item -ItemType Directory -Path $tempRoot | Out-Null
+
     Write-Step "Baixando a versao mais recente"
     $archiveUrl = "https://api.github.com/repos/$Owner/$Repo/tarball/$Branch"
 
@@ -151,10 +188,29 @@ try {
     Copy-Item -Path (Join-Path $extractedRoot.FullName "*") -Destination $repoRoot -Recurse -Force
 
     Set-Content -LiteralPath $lastSyncFile -Value $remoteSha -NoNewline
+
+    $summary.status = "success"
+    $summary.results.mode = "updated-local-workspace"
+    $summary.validation += @{
+        type = "sha-compare"
+        status = "passed"
+        details = "Commit remoto baixado e registrado localmente."
+    }
+
     Write-Host "Sincronizacao concluida com sucesso." -ForegroundColor Green
+    Write-Host "Report: $($report.SummaryPath)"
+}
+catch {
+    $summary.status = "failed"
+    $summary.errors += @{
+        message = $_.Exception.Message
+    }
+    throw
 }
 finally {
-    if (Test-Path -LiteralPath $tempRoot) {
+    Write-ReportSummary -Summary $summary -SummaryPath $report.SummaryPath
+
+    if ($tempRoot -and (Test-Path -LiteralPath $tempRoot)) {
         Remove-Item -LiteralPath $tempRoot -Recurse -Force
     }
 }
